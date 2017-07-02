@@ -6,8 +6,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 require('dotenv').config()
 
-const passport = require('passport-facebook')
-
+const passport = require('passport')
+const FacebookStrategy = require('passport-facebook').Strategy
 
 const index = require('./routes/index');
 const users = require('./routes/users');
@@ -25,26 +25,32 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
-
-//Pasport O auth
-
-
-passport.use(new FacebookStrategy({
+function facebookOAuth() {
+  console.log('in O auth');
+  //Pasport O auth
+  passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: "http://localhost:3000/users/auth/facebook/callback"
   },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  }
-));
+    function(accessToken, refreshToken, profile, cb) {
+      console.log('success!!! access Token --->', accessToken);
+      console.log('success!!! refresh Token --->', refreshToken);
+      console.log('success!!! Profile --->', profile);
+
+        if (accessToken) {return facebookCallback(null,accessToken)}
+        if (refreshToken) {return facebookCallback(null,refreshToken)}
+
+        return facebookCallback(' ERROR : No refresh or access Token exists!')
+    }));
+}
 
 
+function facebookCallback(err,token) {
+  console.log('error ----->',err);
+  console.log('token ---->',token);
 
-
-
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -63,5 +69,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+facebookOAuth()
 
 module.exports = app;
