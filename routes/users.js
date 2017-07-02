@@ -9,13 +9,6 @@ router.get('/', function(req, res, next) {
 });
 
 
-// router.get('/auth/facebook/callback', function(req, res, next) {
-//   passport.authenticate('facebook', {failureRedirect: '/login' }),
-//   function(req, res) {
-//     console.log('hit callback');
-//     res.redirect('/users');
-//   }
-// })
 
 router.get('/auth/facebook/callback', function(req, res, next) {
   passport.authenticate('facebook', function(err, user, info) {
