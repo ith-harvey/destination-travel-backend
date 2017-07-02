@@ -33,7 +33,7 @@ router.get('/login', function(req, res, next) {
 });
 
  // sends user to facebook
-router.get('/auth/facebook', passport.authenticate('facebook',{ scope: ['email', 'user_friends']}));
+router.get('/auth/facebook', passport.authenticate('facebook',{ scope: ['email']}));
 
 
 function LogUserIn(req, res, next, err, user, info) {
