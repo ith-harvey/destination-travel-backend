@@ -17,7 +17,7 @@ module.exports = new FacebookStrategy({
         if (accessToken) {return facebookCallback(null,accessToken)}
         if (refreshToken) {return facebookCallback(null,refreshToken)}
 
-        return facebookCallback(' ERROR : No refresh or access Token exists!')
+        return facebookCallback('ERROR : No refresh or access Token exists!')
 
         function facebookCallback(err,token) {
           console.log('error ----->',err);
