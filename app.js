@@ -5,25 +5,22 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const pg = require('pg')
-
 const passport = require('passport')
-
 require('dotenv').config()
 
 const index = require('./routes/index');
 const users = require('./routes/users');
+const sessions = require('./routes/sessions');
 
 const passportOauth = require('./passport-Oauth.js')
-
 const app = express();
-
+const session = require('express-session');
 
 // Facebook O-Auth
 passport.use(passportOauth)
 
-
-
 // uncomment after placing your favicon in /public
+
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -31,8 +28,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use(session({
+  name: 'destination-travel-application',
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}))
+
+app.use(require('cors')({ // new
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+  optionsSuccessStatus: 200
+}));
+
+
+
 app.use('/', index);
 app.use('/users', users);
+app.use('/sessions', sessions);
 
 
 
