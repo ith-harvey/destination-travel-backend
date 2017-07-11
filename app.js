@@ -33,7 +33,8 @@ app.use(session({
   name: 'destination-travel-application',
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { httpOnly: false }
 }))
 
 app.use(require('cors')({ // new

@@ -13,7 +13,6 @@ function ResourceFactory (table) {
     }
 
     static create (body) {
-      console.log('in create Resources', body);
       return db(table).insert(body).returning('*')
     }
 

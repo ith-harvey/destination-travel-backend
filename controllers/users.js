@@ -7,13 +7,13 @@ function index (req, res, next) {
 
 function show (req, res, next) {
   const id = req.params.id
-  User.findById(id).then(user => res.json({ user })).catch(next)
+  User.findById(id).then(user => {
+    console.log('in show user', user);
+    delete user.password
+    res.json({ user })
+  }).catch(next)
 }
 
-// function create (req, res, next) {
-//   const body = req.body
-//   User.create(body).then(([user]) => res.json({ user })).catch(next)
-// }
 
 function create (req, res, next) {
   const body = req.body
