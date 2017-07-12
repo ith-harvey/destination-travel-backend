@@ -7,7 +7,14 @@ exports.seed = function(knex, Promise) {
           first_name: 'Krystal',
           last_name: 'Parish',
           email: 'email@gmail.com',
-          hashed_password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
+          password: '$2a$12$C9AYYmcLVGYlGoO4vSZTPud9ArJwbGRsJ6TUsNULzR48z8fOnTXbS',
+        },
+        {
+          id: 2,
+          first_name: 'Ian',
+          last_name: 'Harvey',
+          email: 'ian@gmail.com',
+          password: '$2a$10$CUMnhk8C2o04wqxLunwO6.f32F.GJ1AzdgQ8RiIdEMxN22JetcS/u',
         }
       ]);
     })

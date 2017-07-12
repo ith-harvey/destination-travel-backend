@@ -9,7 +9,10 @@ class User extends Resource {
 
     if (!email || !password) return Promise.reject({ status: 422, message: 'Email and password required.' })
 
-    return bcrypt.hash(password).then(password => super.create({ email, password, first_name, last_name}))
+    return bcrypt.hash(password).then(password => {
+      console.log('encrypted pass-->', password)
+      return super.create({ email, password, first_name, last_name})
+    })
   }
 
   static findByEmail (email) {

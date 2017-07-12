@@ -4,8 +4,7 @@ exports.up = function(knex) {
     table.string('first_name').notNull()
     table.string('last_name').notNull()
     table.string('email').notNull().unique()
-    // table.string('password').notNull().unique()
-    table.specificType('password','char(60)')
+    table.specificType('password','char(60)').notNull()
     table.timestamps(true,true)
   })
 };
