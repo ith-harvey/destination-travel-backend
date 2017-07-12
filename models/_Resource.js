@@ -5,6 +5,7 @@ function ResourceFactory (table) {
     constructor () {}
 
     static all () {
+      console.log('in all!');
       return db(table)
     }
 

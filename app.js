@@ -11,6 +11,7 @@ require('dotenv').config()
 const index = require('./routes/index');
 const users = require('./routes/users');
 const sessions = require('./routes/sessions');
+const trips = require('./routes/trips');
 
 const passportOauth = require('./passport-Oauth.js')
 const app = express();
@@ -48,6 +49,7 @@ app.use(require('cors')({ // new
 app.use('/', index);
 app.use('/users', users);
 app.use('/sessions', sessions);
+app.use('/trips', trips);
 
 
 
