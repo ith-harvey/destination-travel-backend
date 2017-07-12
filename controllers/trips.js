@@ -6,6 +6,12 @@ function index (req, res, next) {
   Trips.all().then(trips => res.json({trips})).catch(next)
 }
 
+function individualsTrips (req, res, next) {
+  console.log('req.params',req.params);
+  console.log('hitting individualsTrips');
+  Trips.findByUserId(req.params.id).then(trips => res.json({trips})).catch(next)
+}
+
 // function show (req, res, next) {
 //   const id = req.params.id
 //   User.findById(id).then(user => {
@@ -26,5 +32,5 @@ function index (req, res, next) {
 // }
 //
 module.exports = {
-  index
+  index, individualsTrips
 }

@@ -15,9 +15,10 @@ class Trips extends Resource {
   //   })
   // }
 
-  // static findByEmail (email) {
-  //   return knex('users').where({ email }).first()
-  // }
+  static findByUserId (id) {
+    const user_id = {user_id: id}
+    return knex('trips').where( user_id )
+  }
 }
 
 module.exports = Trips
