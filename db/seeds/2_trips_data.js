@@ -5,20 +5,20 @@ exports.seed = function(knex, Promise) {
         {
           id: 1,
           user_id: 2,
-          name: 'Trip through Southern Europe',
-          description: 'Going with Sam, Spencer and Rob. All about adventure baby.'
+          trip_name: 'Trip through Southern Europe',
+          trip_description: 'Going with Sam, Spencer and Rob. All about adventure baby.'
         },
         {
           id: 2,
           user_id: 2,
-          name: 'Trip to Australia and India',
-          description: 'Meeting up with my friends in Australia, Sammy then headed to india to meet up with Stefan.'
+          trip_name: 'Trip to Australia and India',
+          trip_description: 'Meeting up with my friends in Australia, Sammy then headed to india to meet up with Stefan.'
         },
         {
           id: 3,
           user_id: 2,
-          name: 'Trip through China and Taiwan',
-          description: 'All by myself. Dont wanna be..'
+          trip_name: 'Trip through China and Taiwan',
+          trip_description: 'All by myself. Dont wanna be..'
         }
       ]);
     })

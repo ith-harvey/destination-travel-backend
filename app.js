@@ -12,6 +12,7 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 const sessions = require('./routes/sessions');
 const trips = require('./routes/trips');
+const cities = require('./routes/cities');
 
 const passportOauth = require('./passport-Oauth.js')
 const app = express();
@@ -50,6 +51,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/sessions', sessions);
 app.use('/trips', trips);
+app.use('/cities', cities);
 
 
 
@@ -70,7 +72,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  console.error(err)
 });
 
 
