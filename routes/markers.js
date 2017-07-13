@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const { cities: ctrl } = require('../controllers')
+const { markers: ctrl } = require('../controllers')
 
 router.get('/', ctrl.index)
-router.get('/trips/:id', ctrl.tripsCities)
+router.get('/cities/:id', ctrl.cityMarkers)
 
 module.exports = router

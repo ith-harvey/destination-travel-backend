@@ -13,6 +13,7 @@ const users = require('./routes/users');
 const sessions = require('./routes/sessions');
 const trips = require('./routes/trips');
 const cities = require('./routes/cities');
+const markers = require('./routes/markers');
 
 const passportOauth = require('./passport-Oauth.js')
 const app = express();
@@ -52,6 +53,7 @@ app.use('/users', users);
 app.use('/sessions', sessions);
 app.use('/trips', trips);
 app.use('/cities', cities);
+app.use('/markers', markers);
 
 
 
