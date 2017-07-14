@@ -7,8 +7,18 @@ function index (req, res, next) {
 }
 
 function cityMarkers (req, res, next) {
-  console.log('in cities')
   Markers.findByCityId(req.params.id).then(markers => {
+    console.log('here is what comes back from our query -->', markers);
+     res.json({markers})
+  }).catch(err => {
+    next(err)
+  })
+}
+
+function insertCityMarker (req, res, next) {
+  console.log('in markers', req.body)
+  const data = req.body
+  Markers.findByCityId(req.params.id).insert(data).then(markers => {
     console.log('here is what comes back from our query -->', markers);
      res.json({markers})
   }).catch(err => {
