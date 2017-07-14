@@ -16,10 +16,7 @@ function cityMarkers (req, res, next) {
 }
 
 function insertCityMarker (req, res, next) {
-  console.log('in markers', req.body)
-  const data = req.body
-  Markers.findByCityId(req.params.id).insert(data).then(markers => {
-    console.log('here is what comes back from our query -->', markers);
+  Markers.createWhere(req.body.savedMarker,req.params.id).then(markers => {
      res.json({markers})
   }).catch(err => {
     next(err)
@@ -46,5 +43,5 @@ function insertCityMarker (req, res, next) {
 // }
 //
 module.exports = {
-  index, cityMarkers
+  index, cityMarkers, insertCityMarker
 }

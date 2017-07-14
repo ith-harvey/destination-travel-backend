@@ -17,6 +17,10 @@ function ResourceFactory (table) {
       return db(table).insert(body).returning('*')
     }
 
+    static createWhere (body, id) {
+      return db(table).where({city_id: id}).insert(body).returning('*')
+    }
+
     static update (id, body) {
       return db(table).update(body).where({ id }).returning('*')
     }
