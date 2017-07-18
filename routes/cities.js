@@ -5,5 +5,6 @@ const { cities: ctrl } = require('../controllers')
 router.get('/', ctrl.index)
 router.get('/trips/:id', ctrl.tripsCities)
 router.delete('/:id', ctrl.deleteCity)
+router.post('/trips/:id', ctrl.postCity)
 
 module.exports = router
