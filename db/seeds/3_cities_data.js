@@ -9,21 +9,24 @@ exports.seed = function(knex, Promise) {
           city_name: 'Amsterdam',
           city_description: 'loved it, really high energy city, great public transportation and a short trip to the airport.',
           city_lat: '52.37',
-          city_lng: '4.895'
+          city_lng: '4.895',
+          city_place_id: 'ChIJVXealLU_xkcRja_At0z9AGY'
         },
         {
           id: 2,
           city_name: 'Brussels',
           city_description: 'Had a hard time getting around, cabs were expensive but the city was goregous.',
           city_lat: '50.85',
-          city_lng: '4.351'
+          city_lng: '4.351',
+          city_place_id: 'ChIJZ2jHc-2kw0cRpwJzeGY6i8E'
         },
         {
           id: 3,
           city_name: 'Cologne',
           city_description: 'food was excellent! Really enjoyed the mueseums Cologne had to offer.',
           city_lat: '50.93',
-          city_lng: '6.960'
+          city_lng: '6.960',
+          city_place_id: 'ChIJ5S-raZElv0cR8HcqSvxgJwQ'
         }
       ]);
     })

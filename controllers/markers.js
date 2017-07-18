@@ -23,25 +23,11 @@ function insertCityMarker (req, res, next) {
   })
 }
 
-// function show (req, res, next) {
-//   const id = req.params.id
-//   User.findById(id).then(user => {
-//     console.log('in show user', user);
-//     delete user.password
-//     res.json({ user })
-//   }).catch(next)
-// }
-//
-//
-// function create (req, res, next) {
-//   const body = req.body
-//   console.log(User.create(body));
-//   User.create(body).then(([user]) => {
-//     console.log('in create')
-//     res.json({ user })
-//   }).catch(next)
-// }
-//
+function deleteMarker (req, res, next) {
+  console.log('hitting delete');
+  Markers.destroy(req.params.id).then(markers => res.json({markers})).catch(next)
+}
+
 module.exports = {
-  index, cityMarkers, insertCityMarker
+  index, cityMarkers, insertCityMarker, deleteMarker
 }

@@ -5,6 +5,7 @@ exports.up = function(knex) {
     table.string('city_description')
     table.string('city_lat').notNull()
     table.string('city_lng').notNull()
+    table.string('city_place_id')
     table.timestamps(true,true)
   })
 };

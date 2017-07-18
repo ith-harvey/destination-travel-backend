@@ -6,6 +6,7 @@ const { markers: ctrl } = require('../controllers')
 router.get('/', ctrl.index)
 router.get('/cities/:id', ctrl.cityMarkers)
 router.post('/cities/:id', ctrl.insertCityMarker)
+router.delete('/:id', ctrl.deleteMarker)
 
 
 module.exports = router

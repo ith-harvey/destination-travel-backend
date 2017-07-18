@@ -6,6 +6,7 @@ exports.up = function(knex) {
     table.string('marker_lat').notNull()
     table.string('marker_lng').notNull()
     table.integer('city_id').references('cities.id').onDelete('CASCADE')
+    table.string('marker_place_id')
     table.timestamps(true,true)
   })
 };

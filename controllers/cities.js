@@ -16,6 +16,15 @@ function tripsCities (req, res, next) {
   })
 }
 
+function deleteCity (req, res, next) {
+  console.log('in delete')
+  Cities.destroy(req.params.id).then(cities => {
+     res.json({cities})
+  }).catch(err => {
+    next(err)
+  })
+}
+
 // function show (req, res, next) {
 //   const id = req.params.id
 //   User.findById(id).then(user => {
@@ -36,5 +45,5 @@ function tripsCities (req, res, next) {
 // }
 //
 module.exports = {
-  index, tripsCities
+  index, tripsCities, deleteCity
 }
