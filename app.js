@@ -46,7 +46,7 @@ app.use(session({
 
 app.use(function (req,res,next) {
   console.log('here is req-->',req.get('host'));
-  console.log('here is req-->',req.get('orgin'));
+  console.log('here is req-->',req.get('origin'));
   next()
 })
 
