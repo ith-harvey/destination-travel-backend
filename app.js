@@ -34,6 +34,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(allowCrossDomain)
+app.enable('trust proxy')
 
 app.use(session({
   name: 'destination-travel-application',
@@ -63,10 +64,7 @@ function allowCrossDomain(req, res, next) {
     'Access-Control-Allow-Headers',
     'Content-Type, Authorization, Content-Length, X-Requested-With'
   );
-  res.header(
-    'Access-Control-Allow-Credentials',
-    'true'
-  );
+}
 
   if ('OPTIONS' == req.method) {
     res.sendStatus(200);
