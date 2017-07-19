@@ -6,7 +6,9 @@ function index (req, res, next) {
 }
 
 function individualsTrips (req, res, next) {
-  Trips.findByUserId(req.params.id).then(trips => res.json({trips})).catch(next)
+  Trips.findByUserId(req.params.id).then(trips => {
+    res.json({trips})
+   }).catch(next)
 }
 
 function create (req, res, next) {
@@ -18,15 +20,13 @@ function create (req, res, next) {
   })
 }
 
-function delete (req, res, next) {
+function deleteTrip (req, res, next) {
   Trips.destroy(req.params.id).then(trips => {
     console.log('in delete')
     res.json({trips})
-  }).catch(err => {
-    next(err)
-  })
+  }).catch(next)
 }
-//
+
 module.exports = {
-  index, individualsTrips, create, delete
+  index, individualsTrips, create, deleteTrip
 }
