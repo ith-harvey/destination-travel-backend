@@ -8,6 +8,8 @@ const pg = require('pg')
 const passport = require('passport')
 require('dotenv').config()
 
+const cors = require('cors')
+
 const index = require('./routes/index');
 const users = require('./routes/users');
 const sessions = require('./routes/sessions');
@@ -31,6 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(allowCrossDomain)
 
 app.use(session({
   name: 'destination-travel-application',
@@ -40,12 +43,27 @@ app.use(session({
   cookie: { httpOnly: false }
 }))
 
-app.use(require('cors')({ // new
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-  optionsSuccessStatus: 200
-}));
+// app.use(require('cors')({ // new
+//   origin: process.env.CLIENT_URL,
+//   credentials: true,
+//   optionsSuccessStatus: 200
+// }));
 
+// CORS Cross Domain
+function allowCrossDomain(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Content-Length, X-Requested-With'
+  );
+
+  if ('OPTIONS' == req.method) {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+}
 
 
 app.use('/', index);
