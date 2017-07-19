@@ -43,6 +43,12 @@ app.use(session({
   cookie: { httpOnly: false }
 }))
 
+app.use(function (req,res,next) {
+  console.log('here is req-->',req);
+  next()
+})
+
+
 // app.use(require('cors')({ // new
 //   origin: process.env.CLIENT_URL,
 //   credentials: true,
@@ -56,6 +62,10 @@ function allowCrossDomain(req, res, next) {
   res.header(
     'Access-Control-Allow-Headers',
     'Content-Type, Authorization, Content-Length, X-Requested-With'
+  );
+  res.header(
+    'Access-Control-Allow-Credentials',
+    'true'
   );
 
   if ('OPTIONS' == req.method) {
