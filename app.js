@@ -45,7 +45,8 @@ app.use(session({
 }))
 
 app.use(function (req,res,next) {
-  console.log('here is req-->',req);
+  console.log('here is req-->',req.get('host'));
+  console.log('here is req-->',req.get('orgin'));
   next()
 })
 
@@ -58,7 +59,7 @@ app.use(function (req,res,next) {
 
 // CORS Cross Domain
 function allowCrossDomain(req, res, next) {
-  // res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header(
     'Access-Control-Allow-Headers',
