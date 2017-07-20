@@ -40,7 +40,7 @@ exports.seed = function(knex, Promise) {
           id: 5,
           city_name: 'Sydney',
           city_description: 'Loved the surf and the people were truly outgoing.',
-          city_lat: '33.8688',
+          city_lat: '-33.8688197',
           city_lng: '151.2093',
           city_place_id: 'ChIJP5iLHkCuEmsRwMwyFmh9AQU'
         },
