@@ -14,8 +14,23 @@ exports.seed = function(knex, Promise) {
         },
         {
           id: 3,
-          trip_id: 1,
+          trip_id: 2,
           city_id: 3
+        },
+        {
+          id: 4,
+          trip_id: 2,
+          city_id: 4
+        },
+        {
+          id: 5,
+          trip_id: 2,
+          city_id: 5
+        },
+        {
+          id: 6,
+          trip_id: 3,
+          city_id: 6
         }
       ]);
     })
