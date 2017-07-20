@@ -1,9 +1,9 @@
 const { User } = require('../models')
 const bcrypt = require('bcrypt-as-promised')
+const jwt = require('jwt-simple')
 
 function refresh (req, res, next) { // new
   const id = req.session.userId
-
   if (id) {
     User.findById(id)
       .then(user => res.json({ user: { id: user.id, email: user.email }}))
@@ -15,16 +15,19 @@ function refresh (req, res, next) { // new
 
 function create (req, res, next) {
   const { email, password } = req.body
-  const err = { status: 401, message: 'Email and password are required' }
+  console.log('req.body',req.body);
+  const err = { status: 400, message: 'Email and password are required' }
 
   if (!email || !password) return next(err)
   User.findByEmail(email)
     .then(user => {
+      console.log('user -->', user);
       return bcrypt.compare(password, user.password)
-        .then(() => {
-          req.session.userId = user.id
-
-          res.json({ user: { id: user.id, email: user.email }})
+        .then( () => {
+          delete user.password
+          let token = jwt.encode(user, process.env.JWT_TOKEN)
+          console.log('in last part',token);
+          res.json({success: true, token: 'JWT ' + token, user_id: user.id})
         })
     })
     .catch(() => next({ status: 401, message: 'Could not login user' }))

@@ -1,9 +1,9 @@
 const users = require('./users')
-const sessions = require('./sessions')
+const jsonweb = require('./jsonweb')
 const trips = require('./trips')
 const cities = require('./cities')
 const markers = require('./markers')
 
 module.exports = {
-  sessions, users, trips, cities, markers
+  jsonweb, users, trips, cities, markers
 }

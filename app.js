@@ -12,18 +12,21 @@ const cors = require('cors')
 
 const index = require('./routes/index');
 const users = require('./routes/users');
-const sessions = require('./routes/sessions');
 const trips = require('./routes/trips');
 const cities = require('./routes/cities');
 const markers = require('./routes/markers');
+const jsonweb = require('./routes/jsonweb')
+
+const jwt = require('jwt-simple');
 
 const passportOauth = require('./passport-Oauth.js')
 const app = express();
 const session = require('express-session');
 
 // Facebook O-Auth
-passport.use(passportOauth)
+// passport.use(passportOauth)
 
+app.use(passport.initialize());
 // uncomment after placing your favicon in /public
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -36,13 +39,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(allowCrossDomain)
 app.enable('trust proxy')
 
-app.use(session({
-  name: 'destination-travel-application',
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: { httpOnly: false }
-}))
+// app.use(session({
+//   name: 'destination-travel-application',
+//   secret: process.env.SESSION_SECRET,
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: { httpOnly: false }
+// }))
 
 app.use(function (req,res,next) {
   console.log('here is req-->',req.get('host'));
@@ -76,7 +79,7 @@ function allowCrossDomain(req, res, next) {
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/sessions', sessions);
+app.use('/jwebt', jsonweb);
 app.use('/trips', trips);
 app.use('/cities', cities);
 app.use('/markers', markers);
