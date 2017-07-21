@@ -15,6 +15,13 @@ class User extends Resource {
     })
   }
 
+  static fbCreate (body) {
+    console.log('body -->', body);
+    const { email, fb_user_id, first_name, last_name } = body
+    if (!email) return Promise.reject({ status: 422, message: 'Cannot retreive email from facebook.' })
+      return super.create({ email, fb_user_id, first_name, last_name})
+  }
+
   static findByEmail (email) {
     return knex('users').where({ email }).first()
   }

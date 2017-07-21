@@ -34,32 +34,37 @@ function fbCreate (req, res, next) {
   rp(options).then(response => {
     console.log('what we get back from fb-->',response);
     const {email, first_name, last_name, id} = response
-    fbname = response.name
-    fbUserId = response.id
+    let body = {
+      email: email,
+      first_name: first_name,
+      last_name: last_name,
+      fb_user_id: id
+    }
 
+    const err = { status: 400, message: 'email request from facebook failed' }
 
+    if (!email) return next(err)
 
+    User.findByEmail(email).then(user => {
+      console.log('user with email-->', user);
+      let token = jwt.encode(user, process.env.JWT_TOKEN)
+      res.json({success: true, token: 'JWT ' + token})
+
+      // if the email didn't exist in DB create a user
+      }).catch(error => {
+        console.log('in post!',error);
+
+        User.fbCreate(body).then(user => {
+
+          console.log('user created-->', user);
+          let token = jwt.encode(user, process.env.JWT_TOKEN)
+
+          console.log('in last part',token);
+          res.json({success: true, token: 'JWT ' + token})
+        })
+      })
   })
-
-  const err = { status: 400, message: 'Email and password are required' }
-
-  // if (!email || !password) return next(err)
-  // User.findByEmail(email)
-  //   .then(user => {
-  //     console.log('user -->', user);
-  //     return bcrypt.compare(password, user.password)
-  //       .then( () => {
-  //         delete user.password
-  //         let token = jwt.encode(user, process.env.JWT_TOKEN)
-  //         console.log('in last part',token);
-  //         res.json({success: true, token: 'JWT ' + token, user_id: user.id})
-  //       })
-  //   })
-  //   .catch(() => next({ status: 401, message: 'Could not login user' }))
 }
-
-
-
 
 
 function create (req, res, next) {
