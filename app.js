@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const pg = require('pg')
 const passport = require('passport')
 require('dotenv').config()
-
 const cors = require('cors')
 
 const index = require('./routes/index');
@@ -39,26 +38,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(allowCrossDomain)
 app.enable('trust proxy')
 
-// app.use(session({
-//   name: 'destination-travel-application',
-//   secret: process.env.SESSION_SECRET,
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: { httpOnly: false }
-// }))
-
 app.use(function (req,res,next) {
   console.log('here is req-->',req.get('host'));
   console.log('here is req-->',req.get('origin'));
   next()
 })
-
-
-// app.use(require('cors')({ // new
-//   origin: process.env.CLIENT_URL,
-//   credentials: true,
-//   optionsSuccessStatus: 200
-// }));
 
 // CORS Cross Domain
 function allowCrossDomain(req, res, next) {
@@ -83,8 +67,6 @@ app.use('/jwebt', jsonweb);
 app.use('/trips', trips);
 app.use('/cities', cities);
 app.use('/markers', markers);
-
-
 
 
 
