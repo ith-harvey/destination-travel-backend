@@ -50,7 +50,7 @@ function postCity (req, res, next) {
 function fbfriendsCities(req, res, next) {
   let returnCityArr = []
   let decoded = req.decoded
-  console.log('hitting friends trips', req.decoded.fb_user_id);
+
     let options = {
       uri: `${fbURL}/${decoded.fb_user_id}/friends`,
       qs: {
@@ -74,19 +74,19 @@ function fbfriendsCities(req, res, next) {
           Trips.findByUserId({user_id: user.id}).then(trips => {
             // console.log('all of Mikes trips--->', trips);
 
-            trips.forEach(trip => {
-              Cities.findByTripId(trip.id).then(cities => {
+          let promises = trips.map(trip => {
+              return Cities.findByTripId(trip.id).then(cities => {
                 // console.log('all cities--->', cities);
 
                 cities.forEach( city => {
                   city.fbName = fbUserObj.name
-
                 })
-                returnCityArr = returnCityArr.concat(cities)
-              }).then(() => {
-
+                return cities
               })
-
+            })
+            Promise.all(promises).then( result => {
+              var cities = result.reduce((a,b) => a.concat(b))
+              res.json(cities)
             })
           })
          })
@@ -94,9 +94,8 @@ function fbfriendsCities(req, res, next) {
     }).catch(err => {
       console.log(err);
     })
-    console.log('returnCityArr -->',returnCityArr);
-    res.json(returnCityArr)
-  }
+
+}
 
 
 module.exports = {
