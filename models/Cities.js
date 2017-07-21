@@ -4,7 +4,7 @@ const knex = require('../db')
 
 class Cities extends Resource {
 
-  static findByUserId (id) {
+  static findByTripId (id) {
     console.log('inside find user by id', id);
     return  knex('trips')
       .join('trips_cities', 'trips.id', 'trips_cities.trip_id')

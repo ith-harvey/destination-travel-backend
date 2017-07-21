@@ -25,6 +25,11 @@ class User extends Resource {
   static findByEmail (email) {
     return knex('users').where({ email }).first()
   }
+
+  static findByFbId (id) {
+    return knex('users').where({ fb_user_id: id }).first()
+  }
+
 }
 
 module.exports = User

@@ -4,9 +4,8 @@ const knex = require('../db')
 
 class Trips extends Resource {
 
-  static findByUserId (id) {
-    const user_id = {user_id: id}
-    return knex('trips').where( user_id )
+  static findByUserId (idobj) {
+    return knex('trips').where(idobj)
   }
 }
 

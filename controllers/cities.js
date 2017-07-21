@@ -1,6 +1,9 @@
 
 const { Cities } = require('../models')
 const { TripsCities } = require('../models')
+const { Trips } = require('../models')
+const { User } = require('../models')
+
 const rp = require('request-promise')
 const fbURL = 'https://graph.facebook.com/v2.4'
 
@@ -9,7 +12,7 @@ function index (req, res, next) {
 }
 
 function tripsCities (req, res, next) {
-  Cities.findByUserId(req.params.id).then(cities => {
+  Cities.findByTripId(req.params.id).then(cities => {
      res.json({cities})
   }).catch(err => {
     next(err)
@@ -45,6 +48,7 @@ function postCity (req, res, next) {
 
 
 function fbfriendsCities(req, res, next) {
+  let returnCityArr = []
   let decoded = req.decoded
   console.log('hitting friends trips', req.decoded.fb_user_id);
     let options = {
@@ -59,14 +63,39 @@ function fbfriendsCities(req, res, next) {
     }
 
     rp(options).then(response => {
-      console.log('what we get back from fb friends request-->',response);
       console.log('fb friends data-->',response.data);
-      console.log('fb friends summary-->',response.summary);
-      res.json({response})
 
+      // for each user object request all trips associated
+      response.data.forEach( fbUserObj => {
+
+        User.findByFbId(fbUserObj.id).then(user => {
+          // console.log('mike-->', user)
+
+          Trips.findByUserId({user_id: user.id}).then(trips => {
+            // console.log('all of Mikes trips--->', trips);
+
+            trips.forEach(trip => {
+              Cities.findByTripId(trip.id).then(cities => {
+                // console.log('all cities--->', cities);
+
+                cities.forEach( city => {
+                  city.fbName = fbUserObj.name
+
+                })
+                returnCityArr = returnCityArr.concat(cities)
+              }).then(() => {
+
+              })
+
+            })
+          })
+         })
+      })
     }).catch(err => {
       console.log(err);
     })
+    console.log('returnCityArr -->',returnCityArr);
+    res.json(returnCityArr)
   }
 
 

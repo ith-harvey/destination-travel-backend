@@ -8,7 +8,8 @@ function index (req, res, next) {
 function individualsTrips (req, res, next) {
   let decoded = req.decoded
   console.log('here it is! -->',decoded.id);
-    Trips.findByUserId(decoded.id).then(trips => {
+
+    Trips.findByUserId({user_id: decoded.id}).then(trips => {
       res.json({trips})
      }).catch(next)
 
