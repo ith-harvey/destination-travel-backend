@@ -8,7 +8,6 @@ function index (req, res, next) {
 
 function cityMarkers (req, res, next) {
   Markers.findByCityId(req.params.id).then(markers => {
-    console.log('here is what comes back from our query -->', markers);
      res.json({markers})
   }).catch(err => {
     next(err)
@@ -16,6 +15,8 @@ function cityMarkers (req, res, next) {
 }
 
 function insertCityMarker (req, res, next) {
+  console.log('req.body ------>', req.body);
+  console.log(req.params.id);
   Markers.createWhere(req.body.savedMarker,req.params.id).then(markers => {
      res.json({markers})
   }).catch(err => {

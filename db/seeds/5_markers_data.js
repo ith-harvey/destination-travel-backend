@@ -2,8 +2,7 @@ exports.seed = function(knex, Promise) {
   return knex('markers').del()
     .then(function () {
       return knex('markers').insert([
-        //52.37,
-        // city_lng: 4.895
+
         {
           id: 1,
           city_id: 1,
@@ -30,6 +29,33 @@ exports.seed = function(knex, Promise) {
           marker_lat: '52.348763',
           marker_lng: '4.89388299999996',
           marker_place_id: 'ChIJMzqLEIsJxkcRp0BQroIzgGc'
+        },
+        {
+          id: 4,
+          city_id: 8,
+          marker_name: 'Los Nardos',
+          marker_description: 'had a great stay, I loved this place. The pillows were perfect!',
+          marker_lat: '23.1347',
+          marker_lng: '-82.3582',
+          marker_place_id: 'ChIJpRzei7B5zYgRAtzsYjssOhM'
+        },
+        {
+          id: 5,
+          city_id: 8,
+          marker_name: 'Hotel Santa Isabel Boutique',
+          marker_description: 'had a great stay, I loved this place. The pillows were perfect!',
+          marker_lat: '23.1402',
+          marker_lng: '-82.3487',
+          marker_place_id: 'ChIJdZBmSmB3zYgRnyE-DAZAX0w'
+        },
+        {
+          id: 6,
+          city_id: 7,
+          marker_name: 'Reykjavik Lights by Keahotels',
+          marker_description: 'had a great stay, I loved this place. The pillows were perfect!',
+          marker_lat: '64.1395',
+          marker_lng: '-21.8822',
+          marker_place_id: 'ChIJF12rqr901kgRr-rNAybiMbI'
         }
       ]);
     })

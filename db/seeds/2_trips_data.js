@@ -19,6 +19,18 @@ exports.seed = function(knex, Promise) {
           user_id: 2,
           trip_name: 'China and Taiwan',
           trip_description: 'All by myself. Dont wanna be..'
+        },
+        {
+          id: 4,
+          user_id: 3,
+          trip_name: 'Iceland!',
+          trip_description: 'All by myself. Dont wanna be..'
+        },
+        {
+          id: 5,
+          user_id: 4,
+          trip_name: 'Cuba',
+          trip_description: 'All by myself. Dont wanna be..'
         }
       ]);
     })

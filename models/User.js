@@ -27,6 +27,7 @@ class User extends Resource {
   }
 
   static findByFbId (id) {
+    console.log('in find!', id);
     return knex('users').where({ fb_user_id: id }).first()
   }
 
