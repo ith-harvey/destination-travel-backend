@@ -54,7 +54,7 @@ exports.seed = function(knex, Promise) {
         },
         {
           id: 7,
-          city_name: 'Reykjavik',
+          city_name: 'Reykjavík, Iceland',
           city_description: 'Very icy but still a beautiful place!',
           city_lat: '64.1265',
           city_lng: '-21.8174',
@@ -62,7 +62,7 @@ exports.seed = function(knex, Promise) {
         },
         {
           id: 8,
-          city_name: 'Havana Cuba',
+          city_name: 'Havana, Cuba',
           city_description: 'Loved the surf and the people were truly outgoing.',
           city_lat: '23.1136',
           city_lng: '-82.3666',

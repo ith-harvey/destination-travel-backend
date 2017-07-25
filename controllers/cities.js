@@ -13,7 +13,15 @@ function index (req, res, next) {
 
 function tripsCities (req, res, next) {
   Cities.findByTripId(req.params.id).then(cities => {
-     res.json({cities})
+    console.log('cities length ----->', cities.length);
+    console.log('cities',cities);
+    // let return = []
+    // cities.map( city => {
+
+    /// map over cities and create a sexy object
+
+
+     res.json({cities, count: cities.length})
   }).catch(err => {
     next(err)
   })
