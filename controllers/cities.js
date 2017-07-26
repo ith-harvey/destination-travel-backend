@@ -11,17 +11,37 @@ function index (req, res, next) {
   Cities.all().then(cities => res.json({cities})).catch(next)
 }
 
-function tripsCities (req, res, next) {
-  Cities.findByTripId(req.params.id).then(cities => {
+function tripsCities(req, res, next) {
+  Cities.findByTripIdWithCityCount(req.params.id).then(cities => {
     console.log('cities length ----->', cities.length);
     console.log('cities',cities);
-    // let return = []
-    // cities.map( city => {
+
+    let resultObj = {}
+    let compiledCities = cities.map( city => {
+
+      if(city.city_id != resultObj.city_id) {
+        delete city.marker_name
+        delete city.marker_description
+        delete city.marker_lat
+        delete city.marker_lng
+        delete city.marker_place_id
+        delete city.marker_id
+        city.marker_count = 1
+        resultObj = city
+        return resultObj
+      } else {
+        resultObj.marker_count += 1
+      }
+    })
+
+  compiledCities = compiledCities.filter( el => {
+      return el !== undefined
+    })
+
+    console.log('/////////////////////compiledCities//////////////', compiledCities);
 
     /// map over cities and create a sexy object
-
-
-     res.json({cities, count: cities.length})
+     res.json({ compiledCities })
   }).catch(err => {
     next(err)
   })
@@ -79,28 +99,47 @@ function fbfriendsCities(req, res, next) {
       console.log('fbUserObj.id',fbUserObj.id);
 
       return User.findByFbId(fbUserObj.id).then(user => {
-          console.log('mike-->', user)
-          console.log('user.id',user.id);
 
         return  Trips.findByUserId({user_id: user.id}).then(trips => {
-            console.log('all of Mikes trips--->', trips);
-
 
           let tripPromises = trips.map(trip => {
-            console.log('trip.id',trip.id);
-              return Cities.findByTripId(trip.id).then(cities => {
-                console.log('all cities--->', cities);
 
-                cities.forEach( city => {
+              return Cities.findByTripIdWithCityCount(trip.id).then(cities => {
+
+                let resultObj = {}
+                let compiledCities = cities.map( city => {
+
+                  if(city.city_id != resultObj.city_id) {
+                    delete city.marker_name
+                    delete city.marker_description
+                    delete city.marker_lat
+                    delete city.marker_lng
+                    delete city.marker_place_id
+                    delete city.marker_id
+                    city.marker_count = 1
+                    resultObj = city
+                    return resultObj
+                  } else {
+                    resultObj.marker_count += 1
+                  }
+                })
+
+                compiledCities = compiledCities.filter( el => {
+                    return el !== undefined
+                  })
+
+                /// map over cities and create a sexy object
+
+                compiledCities.forEach( city => {
                   city.fbName = fbUserObj.name
                 })
-                return cities
+                return compiledCities
               })
             })
 
           return Promise.all(tripPromises).then(trips => {
             let reducTrip = trips.reduce((a,b) => a.concat(b))
-            console.log('trips!!!!',reducTrip);
+
             return reducTrip
           })
         })
@@ -109,8 +148,12 @@ function fbfriendsCities(req, res, next) {
       })
     })
     Promise.all(promises).then( result => {
-      console.log('what we are sending!!!! --->',result);
+      result = result.filter( el => {
+          return el !== undefined
+        })
+
       var cities = result.reduce((a,b) => a.concat(b))
+
       res.json(cities)
     })
     }).catch(err => {

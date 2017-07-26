@@ -7,14 +7,12 @@ function index (req, res, next) {
 
 function individualsTrips (req, res, next) {
   let decoded = req.decoded
-  console.log('in individualsTrips');
-  console.log('here it is! -->',decoded.id);
 
+  console.log('here it is! -->',decoded.id);
 
     Trips.findByUserId({user_id: decoded.id}).then(trips => {
       res.json({trips})
      }).catch(next)
-
 }
 
 function create (req, res, next) {
