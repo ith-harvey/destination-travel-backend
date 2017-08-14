@@ -21,6 +21,8 @@ Feel free to use the included start script `~ npm run dev`
 ## Built With
 
 * [Node.js](https://nodejs.org/en/) - Development platform that executes JavaScript server-side
+* [Express](https://expressjs.com/) - Node.js web application framework
+* [Passport](http://passportjs.org/) - Authentication middleware for Node.js
 
 ## License
 
