@@ -20,7 +20,7 @@ Feel free to use the included start script `~ npm run dev`
 
 ## Built With
 
-* [Node.js](https://nodejs.org/en/) - The web framework used
+* [Node.js](https://nodejs.org/en/) - Development platform that executes JavaScript server-side
 
 ## License
 
