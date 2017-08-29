@@ -1,5 +1,6 @@
 
-# Destination (this is the backend of the application)
+# Destination
+(this is the backend of the application)
 
 Sifting through massive amounts of information online has always been a difficult process for travelers. Although recommendation sites have become the norm, word of mouth continues to prevail as the go to resource for every traveler.
 
