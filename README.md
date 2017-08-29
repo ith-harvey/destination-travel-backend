@@ -1,4 +1,6 @@
 
+![screenshot](https://github.com/ith-harvey/destination-travel/blob/master/screenshot.jpeg)
+
 # Destination ( backend of the application)
 [AngularJS and Ionic fontend of the application](https://github.com/ith-harvey/destination-travel)
 
